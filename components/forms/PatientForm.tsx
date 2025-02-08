@@ -40,10 +40,13 @@ export const PatientForm = () => {
       const newUser = await createUser(user);
 
       if (newUser) {
+        console.log("User created:", newUser); // Add this log to check the user data
         router.push(`/patients/${newUser.$id}/register`);
+      } else {
+        console.error("User creation failed.");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error during user creation:", error);
     }
 
     setIsLoading(false);

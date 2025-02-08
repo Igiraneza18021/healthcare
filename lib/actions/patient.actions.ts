@@ -102,11 +102,19 @@ export const getPatient = async (userId: string) => {
       [Query.equal("userId", [userId])]
     );
 
+    console.log("Patient API Response:", patients); // Debugging
+
+    if (!patients.documents.length) {
+      console.error("No patient found for userId:", userId);
+      return null; // Prevents undefined error
+    }
+
     return parseStringify(patients.documents[0]);
   } catch (error) {
     console.error(
       "An error occurred while retrieving the patient details:",
       error
     );
+    return null;
   }
 };
